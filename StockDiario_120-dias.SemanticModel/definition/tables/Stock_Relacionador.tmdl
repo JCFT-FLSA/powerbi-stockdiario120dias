@@ -1,0 +1,130 @@
+table Stock_Relacionador
+	lineageTag: d91bf5ee-3cbf-4d88-8599-fd3127e9e7a7
+
+	column Centro
+		dataType: int64
+		formatString: 0
+		lineageTag: 23ed4cd2-cdb1-4604-a21e-f4bea8f60a9d
+		summarizeBy: none
+		sourceColumn: Centro
+
+		annotation SummarizationSetBy = Automatic
+
+	column RelacionadorCalidad
+		dataType: string
+		lineageTag: 5e7b70db-09e8-4fca-8103-36ecfa5eec6c
+		summarizeBy: none
+		sourceColumn: RelacionadorCalidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fecha
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: fdf27edb-7153-48d8-b69a-2cd669158140
+		summarizeBy: none
+		sourceColumn: Fecha
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Stock
+		dataType: double
+		lineageTag: 6d49efed-f162-4559-89a4-3650b1c37ac1
+		summarizeBy: sum
+		sourceColumn: Stock
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ValorBs
+		dataType: double
+		lineageTag: a7c5b027-17df-4e3e-8838-19ce9636a30b
+		summarizeBy: sum
+		sourceColumn: ValorBs
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Id_RelacionadorCalidad
+		dataType: string
+		lineageTag: d311459a-f43f-4e53-95ee-53968cac450c
+		summarizeBy: none
+		sourceColumn: Id_RelacionadorCalidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column Prm_Qty
+		dataType: double
+		lineageTag: d1a541e3-d57b-49fe-bf51-14bec1f6d1f7
+		summarizeBy: sum
+		sourceColumn: Prm_Qty
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Valor_PrmUnit
+		dataType: double
+		lineageTag: 071a14a0-ddec-4c38-9b9a-42c723f125eb
+		summarizeBy: sum
+		sourceColumn: Valor_PrmUnit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Qty_VtaPerdida
+		dataType: double
+		lineageTag: 65acaeae-eb20-409c-83e2-7d80dce056ba
+		summarizeBy: sum
+		sourceColumn: Qty_VtaPerdida
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Valor_VtaPerdida
+		dataType: double
+		lineageTag: 313ff97c-d533-46b2-a58f-fb789386d30c
+		summarizeBy: sum
+		sourceColumn: Valor_VtaPerdida
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ABC
+		dataType: string
+		lineageTag: 43f5aa4a-489c-4252-8957-7377b1006559
+		summarizeBy: none
+		sourceColumn: ABC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Stock_Relacionador = m
+		mode: import
+		source =
+				let
+				    Origen = Table.Combine({StockMes0, StockMes1, StockMes2, StockMes3}),
+				    #"Consultas combinadas" = Table.NestedJoin(Origen, {"Id_RelacionadorCalidad"}, VtasPrm_RelacionadorCalidad, {"Id-RelaCalidad_Centro"}, "VtasPrm_RelacionadorCalidad", JoinKind.LeftOuter),
+				    #"Se expandió VtasPrm_RelacionadorCalidad" = Table.ExpandTableColumn(#"Consultas combinadas", "VtasPrm_RelacionadorCalidad", {"Prm_Qty", "Valor_PrmUnit"}, {"Prm_Qty", "Valor_PrmUnit"}),
+				    #"Valor reemplazado" = Table.ReplaceValue(#"Se expandió VtasPrm_RelacionadorCalidad",null,0,Replacer.ReplaceValue,{"Prm_Qty", "Valor_PrmUnit"}),
+				    #"Personalizada agregada" = Table.AddColumn(#"Valor reemplazado", "Qty_VtaPerdida", each if ([Prm_Qty] - [Stock]) >= 0 then ([Prm_Qty] - [Stock]) else 0),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Personalizada agregada",{{"Qty_VtaPerdida", type number}}),
+				    #"Personalizada agregada1" = Table.AddColumn(#"Tipo cambiado", "Valor_VtaPerdida", each [Qty_VtaPerdida] * [Valor_PrmUnit]),
+				    #"Tipo cambiado1" = Table.TransformColumnTypes(#"Personalizada agregada1",{{"Valor_VtaPerdida", type number}}),
+				    #"Consultas combinadas1" = Table.NestedJoin(#"Tipo cambiado1", {"Id_RelacionadorCalidad"}, ABC_RelCalidad_x_Centros, {"Id_RelacionadorCalidad"}, "ABC_RelCalidad_x_Centros", JoinKind.LeftOuter),
+				    #"Se expandió ABC_RelCalidad_x_Centros" = Table.ExpandTableColumn(#"Consultas combinadas1", "ABC_RelCalidad_x_Centros", {"ABC"}, {"ABC"})
+				in
+				    #"Se expandió ABC_RelCalidad_x_Centros"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Exception
+

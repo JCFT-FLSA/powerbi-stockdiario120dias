@@ -1,0 +1,42 @@
+model Model
+	culture: es-BO
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-BO
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Fechas","Medidas","StockDiarioMesActual","StockDiarioMes1","StockDiarioMes2","StockDiarioMes3","Sucursales","Materiales","Regionales","Marcas","VentasSAP_2025","VentasSAP_2026","Ventas","Canales","Clientes","ABC_x_Centros","ABC_RelCalidad_x_Centros","Vendedores","TipoCalidad","Monedas","StockMes0","StockMes1","StockMes2","StockMes3","VtasPromedio","VtasPrm_RelacionadorCalidad","Stock_Relacionador","Stock_Materiales","Fechas_Relacionador","Materiales_Relacionador","Stock_Materiales (2)"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DateTableTemplate_ad65ce99-8d0d-4633-a6d0-4358fb8754cd
+ref table Fechas
+ref table LocalDateTable_d09eb400-0895-48c7-95d9-9ee53ca561c3
+ref table LocalDateTable_e6a329fe-59c0-4650-882c-7d3b62cdd7dd
+ref table Medidas
+ref table Sucursales
+ref table Materiales
+ref table Ventas
+ref table Canales
+ref table Clientes
+ref table LocalDateTable_35aec381-7f56-4967-ba0f-6321a8fd9eb5
+ref table Vendedores
+ref table TipoCalidad
+ref table Monedas
+ref table VtasPromedio
+ref table VtasPrm_RelacionadorCalidad
+ref table Stock_Relacionador
+ref table Stock_Materiales
+ref table Fechas_Relacionador
+ref table LocalDateTable_79d04dc0-e75f-43b0-9d7b-ddcd7115ab39
+ref table LocalDateTable_c3efa680-3293-4bbd-bd78-133542a219d2
+ref table Materiales_Relacionador
+ref table ABC_x_Centros
+ref table 'Stock_Materiales (2)'
+ref table LocalDateTable_4c03ac59-3b25-45de-856d-1c0065f8c4fe
+
+ref cultureInfo es-BO
+

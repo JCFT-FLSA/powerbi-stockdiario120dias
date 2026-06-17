@@ -1,0 +1,82 @@
+relationship 3bca736d-2807-4860-969c-55ce9c358f6c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Fechas.Fecha
+	toColumn: LocalDateTable_d09eb400-0895-48c7-95d9-9ee53ca561c3.Date
+
+relationship e4739883-3c12-4f61-ba69-bba20ba93cfe
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Fechas.AñoMes
+	toColumn: LocalDateTable_e6a329fe-59c0-4650-882c-7d3b62cdd7dd.Date
+
+relationship 6f474157-999d-8142-3010-7b1a2569797c
+	fromColumn: Ventas.Fecha
+	toColumn: Fechas.Fecha
+
+relationship e076563b-6096-1392-d921-8388d9f57331
+	fromColumn: Ventas.Sucursal
+	toColumn: Sucursales.'Oficina de Ventas'
+
+relationship 8376be5d-0905-422e-b646-daed15a945f0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Clientes.'Fecha Registro'
+	toColumn: LocalDateTable_35aec381-7f56-4967-ba0f-6321a8fd9eb5.Date
+
+relationship AutoDetected_a359776a-1a34-4f07-9ab1-f8e2f6bbcc66
+	fromColumn: Stock_Materiales.Material
+	toColumn: Materiales.Material
+
+relationship 00ce6718-2170-62fa-6ac0-060b24168b9d
+	fromColumn: Stock_Materiales.Centro
+	toColumn: Sucursales.CodSuc
+
+relationship 400f485f-8d23-4449-807f-c727ece0b00d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Fechas_Relacionador.Fecha
+	toColumn: LocalDateTable_79d04dc0-e75f-43b0-9d7b-ddcd7115ab39.Date
+
+relationship c03c9a43-8775-40dd-a60d-ddff2b3656f0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Fechas_Relacionador.AñoMes
+	toColumn: LocalDateTable_c3efa680-3293-4bbd-bd78-133542a219d2.Date
+
+relationship 6b4a71d0-9b47-fd09-8195-8075d26ffe23
+	fromColumn: Ventas.Fecha
+	toColumn: Fechas_Relacionador.Fecha
+
+relationship AutoDetected_abbe778d-cbf8-49b1-9eaf-089d3f05b410
+	fromColumn: ABC_x_Centros.Material
+	toColumn: Materiales.Material
+
+relationship AutoDetected_6b7850f0-4bee-46f8-b0fb-6bd12bf9932c
+	fromColumn: ABC_x_Centros.Material
+	toColumn: Materiales_Relacionador.Material
+
+relationship da9481d9-cc88-275f-22fb-3fbdd374afc9
+	fromColumn: Ventas.Material
+	toColumn: Materiales.Material
+
+relationship bfc05215-ecd9-6baf-01a1-b8f88d3839e7
+	fromColumn: Stock_Materiales.Fecha
+	toColumn: Fechas.Fecha
+
+relationship 4ed5dc68-aa1c-5c8f-e043-25047fba9b15
+	fromColumn: Stock_Relacionador.Centro
+	toColumn: Sucursales.CodSuc
+
+relationship abae9e32-bdae-bd36-891c-a26ae0024c7a
+	fromColumn: Stock_Relacionador.Fecha
+	toColumn: Fechas_Relacionador.Fecha
+
+relationship 2f5f5a01-5ac8-481f-bd21-0f101926972b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Stock_Materiales (2)'.Fecha
+	toColumn: LocalDateTable_4c03ac59-3b25-45de-856d-1c0065f8c4fe.Date
+
+relationship AutoDetected_4bb98e90-1463-4535-8d89-c78842608a32
+	fromColumn: 'Stock_Materiales (2)'.Material
+	toColumn: Materiales.Material
+
+relationship AutoDetected_bd6a92f0-bd9b-4f41-8271-24a567177a5b
+	fromColumn: 'Stock_Materiales (2)'.Material
+	toColumn: Materiales_Relacionador.Material
+

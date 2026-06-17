@@ -1,0 +1,224 @@
+expression Regionales =
+		let
+		    Origen = PowerBI.Dataflows(null),
+		    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+		    #"8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a"]}[Data],
+		    Regionales1 = #"8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a"{[entity="Regionales"]}[Data]
+		in
+		    Regionales1
+	lineageTag: ed6a3e17-a337-4d0a-a06c-3753137eb23b
+
+	annotation PBI_ResultType = Table
+
+expression Marcas =
+		let
+		    Origen = PowerBI.Dataflows(null),
+		    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+		    #"8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a"]}[Data],
+		    Marcas1 = #"8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a"{[entity="Marcas"]}[Data]
+		in
+		    Marcas1
+	lineageTag: 734bdebe-1660-43d9-881a-6099dbd8bd3c
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
+expression VentasSAP_2025 =
+		let
+		    Origen = PowerBI.Dataflows(null),
+		    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+		    #"d0f7820e-3326-40b6-a7b9-a3d4f2875f7e" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="d0f7820e-3326-40b6-a7b9-a3d4f2875f7e"]}[Data],
+		    VentasSAP_1 = #"d0f7820e-3326-40b6-a7b9-a3d4f2875f7e"{[entity="VentasSAP_2025"]}[Data]
+		in
+		    VentasSAP_1
+	lineageTag: c90bc3c4-324c-4bc7-a733-bf8f27aa8869
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
+expression VentasSAP_2026 =
+		let
+		    Origen = PowerBI.Dataflows(null),
+		    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+		    #"e634486e-62ef-49ab-b800-025d97a2b997" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="e634486e-62ef-49ab-b800-025d97a2b997"]}[Data],
+		    VentasSAP_1 = #"e634486e-62ef-49ab-b800-025d97a2b997"{[entity="VentasSAP_2026"]}[Data]
+		in
+		    VentasSAP_1
+	lineageTag: 7acdd91d-6006-4912-8d1c-6f7ce69ce181
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
+expression StockMes0 =
+		let
+		    Origen = PowerBI.Dataflows(null),
+		    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+		    #"f83a2546-53d4-48ec-b68a-4cea275c7672" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="f83a2546-53d4-48ec-b68a-4cea275c7672"]}[Data],
+		    StockDiarioMesActual1 = #"f83a2546-53d4-48ec-b68a-4cea275c7672"{[entity="StockDiarioMesActual"]}[Data],
+		    #"Consultas combinadas" = Table.NestedJoin(StockDiarioMesActual1, {"Fecha"}, Fechas, {"Fecha"}, "Fechas", JoinKind.LeftOuter),
+		    #"Se expandió Fechas" = Table.ExpandTableColumn(#"Consultas combinadas", "Fechas", {"Laborable"}, {"Fechas.Laborable"}),
+		    #"Filas filtradas" = Table.SelectRows(#"Se expandió Fechas", each ([Fechas.Laborable] <> null)),
+		    #"Columnas quitadas" = Table.RemoveColumns(#"Filas filtradas",{"Fechas.Laborable"}),
+		    #"Consultas combinadas1" = Table.NestedJoin(#"Columnas quitadas", {"Material"}, Materiales, {"Material"}, "Materiales", JoinKind.LeftOuter),
+		    #"Se expandió Materiales" = Table.ExpandTableColumn(#"Consultas combinadas1", "Materiales", {"Relacionador calidad"}, {"Relacionador calidad"}),
+		    #"Filas agrupadas" = Table.Group(#"Se expandió Materiales", {"Centro", "Relacionador calidad", "Fecha"}, {{"Stock", each List.Sum([Stock]), type nullable number}, {"ValorBs", each List.Sum([ValorBs]), type nullable number}}),
+		    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Filas agrupadas",{{"Relacionador calidad", "RelacionadorCalidad"}}),
+		    #"Personalizada agregada" = Table.AddColumn(#"Columnas con nombre cambiado", "Id_RelacionadorCalidad", each Text.Combine ({Text.From(Date.Year([Fecha]), "es-BO"), "_", Text.From([RelacionadorCalidad], "es-BO"), "_", Text.From([Centro], "es-BO")}))
+		in
+		    #"Personalizada agregada"
+	lineageTag: 49578e74-23c6-437f-b625-4a3a9b39a3d1
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
+expression StockMes1 =
+		let
+		    Origen = PowerBI.Dataflows(null),
+		    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+		    #"88205f59-9f9d-4f37-85e1-ad5f720b2ef6" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="88205f59-9f9d-4f37-85e1-ad5f720b2ef6"]}[Data],
+		    StockDiarioMes_1 = #"88205f59-9f9d-4f37-85e1-ad5f720b2ef6"{[entity="StockDiarioMes_1"]}[Data],
+		    #"Consultas combinadas" = Table.NestedJoin(StockDiarioMes_1, {"Fecha"}, Fechas, {"Fecha"}, "Fechas", JoinKind.LeftOuter),
+		    #"Se expandió Fechas" = Table.ExpandTableColumn(#"Consultas combinadas", "Fechas", {"Laborable"}, {"Fechas.Laborable"}),
+		    #"Filas filtradas" = Table.SelectRows(#"Se expandió Fechas", each ([Fechas.Laborable] <> null)),
+		    #"Columnas quitadas" = Table.RemoveColumns(#"Filas filtradas",{"Fechas.Laborable"}),
+		    #"Consultas combinadas1" = Table.NestedJoin(#"Columnas quitadas", {"Material"}, Materiales, {"Material"}, "Materiales", JoinKind.LeftOuter),
+		    #"Se expandió Materiales" = Table.ExpandTableColumn(#"Consultas combinadas1", "Materiales", {"Relacionador calidad"}, {"Relacionador calidad"}),
+		    #"Filas agrupadas" = Table.Group(#"Se expandió Materiales", {"Centro", "Relacionador calidad", "Fecha"}, {{"Stock", each List.Sum([Stock]), type nullable number}, {"ValorBs", each List.Sum([ValorBs]), type nullable number}}),
+		    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Filas agrupadas",{{"Relacionador calidad", "RelacionadorCalidad"}}),
+		    #"Personalizada agregada" = Table.AddColumn(#"Columnas con nombre cambiado", "Id_RelacionadorCalidad", each Text.Combine ({Text.From(Date.Year([Fecha]), "es-BO"), "_", Text.From([RelacionadorCalidad], "es-BO"), "_", Text.From([Centro], "es-BO")}))
+		in
+		    #"Personalizada agregada"
+	lineageTag: 2c4b46a6-7e41-47cb-91fd-c0cb3069dc77
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
+expression StockMes2 =
+		let
+		    Origen = PowerBI.Dataflows(null),
+		    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+		    #"88205f59-9f9d-4f37-85e1-ad5f720b2ef6" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="88205f59-9f9d-4f37-85e1-ad5f720b2ef6"]}[Data],
+		    StockDiarioMes_2 = #"88205f59-9f9d-4f37-85e1-ad5f720b2ef6"{[entity="StockDiarioMes_2"]}[Data],
+		    #"Consultas combinadas" = Table.NestedJoin(StockDiarioMes_2, {"Fecha"}, Fechas, {"Fecha"}, "Fechas", JoinKind.LeftOuter),
+		    #"Se expandió Fechas" = Table.ExpandTableColumn(#"Consultas combinadas", "Fechas", {"Laborable"}, {"Fechas.Laborable"}),
+		    #"Filas filtradas" = Table.SelectRows(#"Se expandió Fechas", each ([Fechas.Laborable] <> null)),
+		    #"Columnas quitadas" = Table.RemoveColumns(#"Filas filtradas",{"Fechas.Laborable"}),
+		    #"Consultas combinadas1" = Table.NestedJoin(#"Columnas quitadas", {"Material"}, Materiales, {"Material"}, "Materiales", JoinKind.LeftOuter),
+		    #"Se expandió Materiales" = Table.ExpandTableColumn(#"Consultas combinadas1", "Materiales", {"Relacionador calidad"}, {"Relacionador calidad"}),
+		    #"Filas agrupadas" = Table.Group(#"Se expandió Materiales", {"Centro", "Relacionador calidad", "Fecha"}, {{"Stock", each List.Sum([Stock]), type nullable number}, {"ValorBs", each List.Sum([ValorBs]), type nullable number}}),
+		    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Filas agrupadas",{{"Relacionador calidad", "RelacionadorCalidad"}}),
+		    #"Personalizada agregada" = Table.AddColumn(#"Columnas con nombre cambiado", "Id_RelacionadorCalidad", each Text.Combine ({Text.From(Date.Year([Fecha]), "es-BO"), "_", Text.From([RelacionadorCalidad], "es-BO"), "_", Text.From([Centro], "es-BO")}))
+		in
+		    #"Personalizada agregada"
+	lineageTag: a7e7b4c5-a187-4ed6-965b-e0bf0f81f604
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
+expression StockMes3 =
+		let
+		    Origen = PowerBI.Dataflows(null),
+		    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+		    #"88205f59-9f9d-4f37-85e1-ad5f720b2ef6" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="88205f59-9f9d-4f37-85e1-ad5f720b2ef6"]}[Data],
+		    StockDiarioMes_3 = #"88205f59-9f9d-4f37-85e1-ad5f720b2ef6"{[entity="StockDiarioMes_3"]}[Data],
+		    #"Consultas combinadas" = Table.NestedJoin(StockDiarioMes_3, {"Fecha"}, Fechas, {"Fecha"}, "Fechas", JoinKind.LeftOuter),
+		    #"Se expandió Fechas" = Table.ExpandTableColumn(#"Consultas combinadas", "Fechas", {"Laborable"}, {"Fechas.Laborable"}),
+		    #"Filas filtradas" = Table.SelectRows(#"Se expandió Fechas", each ([Fechas.Laborable] <> null)),
+		    #"Columnas quitadas" = Table.RemoveColumns(#"Filas filtradas",{"Fechas.Laborable"}),
+		    #"Consultas combinadas1" = Table.NestedJoin(#"Columnas quitadas", {"Material"}, Materiales, {"Material"}, "Materiales", JoinKind.LeftOuter),
+		    #"Se expandió Materiales" = Table.ExpandTableColumn(#"Consultas combinadas1", "Materiales", {"Relacionador calidad"}, {"Relacionador calidad"}),
+		    #"Filas agrupadas" = Table.Group(#"Se expandió Materiales", {"Centro", "Relacionador calidad", "Fecha"}, {{"Stock", each List.Sum([Stock]), type nullable number}, {"ValorBs", each List.Sum([ValorBs]), type nullable number}}),
+		    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Filas agrupadas",{{"Relacionador calidad", "RelacionadorCalidad"}}),
+		    #"Personalizada agregada" = Table.AddColumn(#"Columnas con nombre cambiado", "Id_RelacionadorCalidad", each Text.Combine ({Text.From(Date.Year([Fecha]), "es-BO"), "_", Text.From([RelacionadorCalidad], "es-BO"), "_", Text.From([Centro], "es-BO")}))
+		in
+		    #"Personalizada agregada"
+	lineageTag: 537e4c6d-4fcf-4a75-9bfa-2ea112113c2d
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
+expression StockDiarioMesActual =
+		let
+		    Origen = PowerBI.Dataflows(null),
+		    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+		    #"f83a2546-53d4-48ec-b68a-4cea275c7672" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="f83a2546-53d4-48ec-b68a-4cea275c7672"]}[Data],
+		    StockDiarioMesActual1 = #"f83a2546-53d4-48ec-b68a-4cea275c7672"{[entity="StockDiarioMesActual"]}[Data],
+		    #"Personalizada agregada" = Table.AddColumn(StockDiarioMesActual1, "Id_MaterialCentro", each Text.Combine({Text.From(Date.Year([Fecha]), "es-BO"), "-", Text.From([Material], "es-BO"), "-", Text.From([Centro], "es-BO")})),
+		    #"Tipo cambiado" = Table.TransformColumnTypes(#"Personalizada agregada",{{"Id_MaterialCentro", type text}})
+		in
+		    #"Tipo cambiado"
+	lineageTag: 45051c12-a527-425f-ba72-5197999be121
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
+expression StockDiarioMes1 =
+		let
+		    Origen = PowerBI.Dataflows(null),
+		    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+		    #"88205f59-9f9d-4f37-85e1-ad5f720b2ef6" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="88205f59-9f9d-4f37-85e1-ad5f720b2ef6"]}[Data],
+		    StockDiarioMes_1 = #"88205f59-9f9d-4f37-85e1-ad5f720b2ef6"{[entity="StockDiarioMes_1"]}[Data],
+		    #"Personalizada agregada" = Table.AddColumn(StockDiarioMes_1, "Id_MaterialCentro", each Text.Combine({Text.From(Date.Year([Fecha]), "es-BO"), "-", Text.From([Material], "es-BO"), "-", Text.From([Centro], "es-BO")})),
+		    #"Tipo cambiado" = Table.TransformColumnTypes(#"Personalizada agregada",{{"Id_MaterialCentro", type text}})
+		in
+		    #"Tipo cambiado"
+	lineageTag: 20f6d3b6-ba73-45f9-8518-1e3de02d4d32
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
+expression StockDiarioMes2 =
+		let
+		    Origen = PowerBI.Dataflows(null),
+		    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+		    #"88205f59-9f9d-4f37-85e1-ad5f720b2ef6" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="88205f59-9f9d-4f37-85e1-ad5f720b2ef6"]}[Data],
+		    StockDiarioMes_2 = #"88205f59-9f9d-4f37-85e1-ad5f720b2ef6"{[entity="StockDiarioMes_2"]}[Data],
+		    #"Personalizada agregada" = Table.AddColumn(StockDiarioMes_2, "Id_MaterialCentro", each Text.Combine({Text.From(Date.Year([Fecha]), "es-BO"), "-", Text.From([Material], "es-BO"), "-", Text.From([Centro], "es-BO")})),
+		    #"Tipo cambiado" = Table.TransformColumnTypes(#"Personalizada agregada",{{"Id_MaterialCentro", type text}})
+		in
+		    #"Tipo cambiado"
+	lineageTag: d89973e4-c4b0-4c03-a714-b5b6ec9c5ec8
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
+expression StockDiarioMes3 =
+		let
+		    Origen = PowerBI.Dataflows(null),
+		    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+		    #"88205f59-9f9d-4f37-85e1-ad5f720b2ef6" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="88205f59-9f9d-4f37-85e1-ad5f720b2ef6"]}[Data],
+		    StockDiarioMes_3 = #"88205f59-9f9d-4f37-85e1-ad5f720b2ef6"{[entity="StockDiarioMes_3"]}[Data],
+		    #"Personalizada agregada" = Table.AddColumn(StockDiarioMes_3, "Id_MaterialCentro", each Text.Combine({Text.From(Date.Year([Fecha]), "es-BO"), "-", Text.From([Material], "es-BO"), "-", Text.From([Centro], "es-BO")})),
+		    #"Tipo cambiado" = Table.TransformColumnTypes(#"Personalizada agregada",{{"Id_MaterialCentro", type text}})
+		in
+		    #"Tipo cambiado"
+	lineageTag: d709aa75-e861-484d-9c54-f08bf8b8b252
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
+expression ABC_RelCalidad_x_Centros =
+		let
+		    Origen = PowerBI.Dataflows(null),
+		    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+		    #"2b9bf284-1b50-433c-ba9a-6398334d3d20" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="2b9bf284-1b50-433c-ba9a-6398334d3d20"]}[Data],
+		    ABC_RelCalidad_x_Centros1 = #"2b9bf284-1b50-433c-ba9a-6398334d3d20"{[entity="ABC_RelCalidad_x_Centros"]}[Data]
+		in
+		    ABC_RelCalidad_x_Centros1
+	lineageTag: b39a4a89-ca06-4203-a0f9-16b62c88a48d
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

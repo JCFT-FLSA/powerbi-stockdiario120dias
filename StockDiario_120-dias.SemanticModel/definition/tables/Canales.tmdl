@@ -1,0 +1,43 @@
+table Canales
+	lineageTag: 3c1d7d90-6413-4ad6-95b8-9f0b4c14f898
+
+	column CodCanal
+		dataType: int64
+		formatString: 0
+		lineageTag: de5f0d20-6890-4cee-a777-50e8adbc1346
+		summarizeBy: sum
+		sourceColumn: CodCanal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Canal_Vtas
+		dataType: string
+		lineageTag: 01688663-a79f-4f14-86de-12f7ca4f82b1
+		summarizeBy: none
+		sourceColumn: Canal_Vtas
+
+		annotation SummarizationSetBy = Automatic
+
+	column Canal
+		dataType: string
+		lineageTag: a6081071-0eeb-4d00-8e44-c72a9d85b5e6
+		summarizeBy: none
+		sourceColumn: Canal
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Canales = m
+		mode: import
+		source =
+				let
+				    Origen = PowerBI.Dataflows(null),
+				    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+				    #"8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a"]}[Data],
+				    Canales1 = #"8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a"{[entity="Canales"]}[Data]
+				in
+				    Canales1
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

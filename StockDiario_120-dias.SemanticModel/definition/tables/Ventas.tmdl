@@ -1,0 +1,277 @@
+table Ventas
+	lineageTag: ef67104c-ceb0-44af-879c-73a55f46a394
+
+	column 'Canal distribución'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3ef9be74-9150-4b9b-bce4-9f7bc24876b8
+		summarizeBy: sum
+		sourceColumn: Canal distribución
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Clase de factura'
+		dataType: string
+		lineageTag: 2ea1eb03-df2f-4e75-b164-f74b612e30a4
+		summarizeBy: none
+		sourceColumn: Clase de factura
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fecha
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: b25218ce-8628-4e46-b5fd-032d898c4120
+		summarizeBy: none
+		sourceColumn: Fecha
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Factura
+		dataType: string
+		lineageTag: ecb2c2ff-c4ce-4d3e-964d-c30a09e7e08b
+		summarizeBy: none
+		sourceColumn: Factura
+
+		annotation SummarizationSetBy = Automatic
+
+	column Material
+		dataType: int64
+		formatString: 0
+		lineageTag: 7e1f23d7-6330-4009-840c-daab9b4c501e
+		summarizeBy: none
+		sourceColumn: Material
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sucursal
+		dataType: string
+		lineageTag: 8e9288b6-1642-47ad-b788-08ff475df01c
+		summarizeBy: none
+		sourceColumn: Sucursal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Promoción
+		dataType: string
+		lineageTag: 1b68ae31-ecae-4bb7-893e-797cf1c7725e
+		summarizeBy: none
+		sourceColumn: Promoción
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vendedor
+		dataType: double
+		lineageTag: b77c9fe6-51f1-423c-9167-99285f7c01e2
+		summarizeBy: sum
+		sourceColumn: Vendedor
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Sector
+		dataType: string
+		lineageTag: a5c16687-f11f-4c99-b0cd-98b45b394d22
+		summarizeBy: none
+		sourceColumn: Sector
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cliente
+		dataType: string
+		lineageTag: 6dd878b0-b775-4fbc-b501-faf78d9963bc
+		summarizeBy: none
+		sourceColumn: Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column Centro
+		dataType: string
+		lineageTag: 56303e13-613e-4d21-8d62-c54342112d27
+		summarizeBy: none
+		sourceColumn: Centro
+
+		annotation SummarizationSetBy = Automatic
+
+	column División
+		dataType: string
+		lineageTag: 0bdb3bc8-e989-4069-9482-484b998207ee
+		summarizeBy: none
+		sourceColumn: División
+
+		annotation SummarizationSetBy = Automatic
+
+	column Costo
+		dataType: double
+		lineageTag: 74150c42-75e9-4a2d-b06e-faef4ea824ff
+		summarizeBy: sum
+		sourceColumn: Costo
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 046f0b59-74b0-46a0-ab32-c1741ad69537
+		summarizeBy: sum
+		sourceColumn: Qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column Facturado
+		dataType: double
+		lineageTag: e7c39a5a-a03f-49e4-9655-a0dd006438e5
+		summarizeBy: sum
+		sourceColumn: Facturado
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Descuento
+		dataType: double
+		lineageTag: 9f9b31b6-b72b-4a84-9ac5-fd3c518eff68
+		summarizeBy: sum
+		sourceColumn: Descuento
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DescuentoBruto
+		dataType: double
+		lineageTag: 63320e89-03e9-44a5-95b8-f01c921fed27
+		summarizeBy: sum
+		sourceColumn: DescuentoBruto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Precio
+		dataType: double
+		lineageTag: b8450176-611c-4e9c-a1b6-20704b72ba8a
+		summarizeBy: sum
+		sourceColumn: Precio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Venta
+		dataType: double
+		lineageTag: f30fcd81-1473-4340-813b-a4bbd7605121
+		summarizeBy: sum
+		sourceColumn: Venta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Nit
+		dataType: string
+		lineageTag: 2a4d3c20-a8b2-4223-8296-e88300f5793b
+		summarizeBy: none
+		sourceColumn: Nit
+
+		annotation SummarizationSetBy = Automatic
+
+	column CodSuc
+		dataType: int64
+		formatString: 0
+		lineageTag: 6367e145-01c3-4bb9-ba26-43168399e2d2
+		summarizeBy: sum
+		sourceColumn: CodSuc
+
+		annotation SummarizationSetBy = Automatic
+
+	column Id_MaterialSucursal
+		dataType: string
+		lineageTag: 0c1d77ba-89ed-4e7a-976a-3f2ee5b95116
+		summarizeBy: none
+		sourceColumn: Id_MaterialSucursal
+
+		annotation SummarizationSetBy = Automatic
+
+	column VtaCruzada
+		dataType: string
+		lineageTag: 85f48f2d-cb12-41f2-bb04-5026ed723d2a
+		summarizeBy: none
+		sourceColumn: VtaCruzada
+
+		annotation SummarizationSetBy = Automatic
+
+	column PVC = ```
+			// Procedimiento de Venta Cruzada ("Ok" | "No PVC")
+			IF (
+			    Ventas[VtaCruzada] = "Normal",
+			    "Ok",
+			    VAR FechaVta = Ventas[Fecha]
+			    VAR Meses =
+			        DATEDIFF ( FechaVta, TODAY(), MONTH )
+			    VAR _IsMaterialSucursal = Ventas[Id_MaterialSucursal] 
+			
+			    -- opcional pero recomendable: acotar el rango antes de consultar tablas grandes
+			    VAR StockCentro =
+			        SWITCH (
+			            Meses,
+			            0, CALCULATE ( VALUES ( Stock_Materiales[Stock] ), Stock_Materiales[Fecha] = FechaVta && Stock_Materiales[Id_MaterialCentro] = _IsMaterialSucursal),
+			            1, CALCULATE ( VALUES ( Stock_Materiales[Stock] ), Stock_Materiales[Fecha] = FechaVta && Stock_Materiales[Id_MaterialCentro] = _IsMaterialSucursal),
+			            2, CALCULATE ( VALUES ( Stock_Materiales[Stock] ), Stock_Materiales[Fecha] = FechaVta && Stock_Materiales[Id_MaterialCentro] = _IsMaterialSucursal),
+			            3, CALCULATE ( VALUES ( Stock_Materiales[Stock] ), Stock_Materiales[Fecha] = FechaVta && Stock_Materiales[Id_MaterialCentro] = _IsMaterialSucursal),
+			            BLANK()
+			        )
+			    RETURN
+			        IF (
+			            Meses IN { 0, 1, 2, 3 } &&
+			            NOT ISBLANK ( StockCentro ) &&
+			            StockCentro >= Ventas[Qty],
+			            "No PVC",
+			            "Ok"
+			        )
+			)
+			
+			```
+		dataType: string
+		lineageTag: 19ffc3e7-cb10-49a5-b393-01ddc37d5754
+		summarizeBy: none
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Ventas = m
+		mode: import
+		source = ```
+				let
+				    Origen = Table.Combine({VentasSAP_2025, VentasSAP_2026}),
+				    Hoy = Date.From(DateTime.LocalNow()),
+				    InicioMesActual = Date.StartOfMonth(Hoy),
+				    InicioVentana = Date.AddMonths(InicioMesActual, -3),    
+				
+				    #"Filtrar Ultimos 3 Meses" = Table.SelectRows(Origen, each [Fecha] >= InicioVentana and [Fecha] <= Hoy),
+				    #"Valor reemplazado" = Table.ReplaceValue(#"Filtrar Ultimos 3 Meses","100","Oriente",Replacer.ReplaceText,{"Sucursal"}),
+				    #"Valor reemplazado1" = Table.ReplaceValue(#"Valor reemplazado","200","Centro",Replacer.ReplaceText,{"Sucursal"}),
+				    #"Valor reemplazado2" = Table.ReplaceValue(#"Valor reemplazado1","300","Occidente",Replacer.ReplaceText,{"Sucursal"}),
+				    #"Consultas combinadas" = Table.NestedJoin(#"Valor reemplazado2", {"Sucursal"}, Sucursales, {"Oficina de Ventas"}, "Sucursales", JoinKind.LeftOuter),
+				    #"Se expandió Sucursales" = Table.ExpandTableColumn(#"Consultas combinadas", "Sucursales", {"CodSuc", "Centro Supply"}, {"CodSuc", "Centro Supply"}),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Se expandió Sucursales",{{"CodSuc", Int64.Type}}),
+				    #"Personalizada agregada1" = Table.AddColumn(#"Tipo cambiado", "CentroVtaCruzada", each if [Centro] = "0190" or [Centro] = "EL ALTO" or [Centro] = "QUILLACOLLO" then [Centro Supply] else [Centro]),
+				    #"Agregar columna personalizada" = Table.AddColumn(#"Personalizada agregada1", "Id_MaterialSucursal", each Text.Combine({Text.PadEnd(Date.ToText([Fecha], "yyyy"), 5, "-"), Text.Reverse(Text.Middle(Text.Reverse(Text.From([Material], "es-BO")), 7)), Text.End(Text.From([Material], "es-BO"), 8), Text.PadStart(Text.From([CodSuc], "es-BO"), 4, "-")}), type text),
+				    #"Personalizada agregada" = Table.AddColumn(#"Agregar columna personalizada", "VtaCruzada", each if [CentroVtaCruzada] = [Centro Supply] then "Normal" else "VentaCruzada"),
+				    #"Otras columnas quitadas" = Table.SelectColumns(#"Personalizada agregada",{"Canal distribución", "Clase de factura", "Fecha", "Factura", "Material", "Sucursal", "Promoción", "Vendedor", "Sector", "Cliente", "Centro", "División", "Costo", "Qty", "Facturado", "Descuento", "DescuentoBruto", "Precio", "Venta", "Nit", "CodSuc", "Id_MaterialSucursal", "VtaCruzada"})
+				in
+				    #"Otras columnas quitadas"
+				```
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,43 @@
+table TipoCalidad
+	lineageTag: 5fe9a24c-39f8-44f2-81d4-6f3a82169c5f
+
+	column TipoCalidad
+		dataType: int64
+		formatString: 0
+		lineageTag: d694c960-c32b-41f0-89bd-ff9a14a74bf5
+		summarizeBy: sum
+		sourceColumn: TipoCalidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column DescFLSA
+		dataType: string
+		lineageTag: d9dbd3e8-8def-4bd2-a55e-9f54e9f8e31d
+		summarizeBy: none
+		sourceColumn: DescFLSA
+
+		annotation SummarizationSetBy = Automatic
+
+	column DescripciónSAP
+		dataType: string
+		lineageTag: 547a59ab-86e9-4b1e-9f25-c796017a7d55
+		summarizeBy: none
+		sourceColumn: DescripciónSAP
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TipoCalidad = m
+		mode: import
+		source =
+				let
+				    Origen = PowerBI.Dataflows(null),
+				    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+				    #"8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a"]}[Data],
+				    TipoCalidad1 = #"8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a"{[entity="TipoCalidad"]}[Data]
+				in
+				    TipoCalidad1
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

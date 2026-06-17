@@ -1,0 +1,209 @@
+table Medidas
+	lineageTag: d6dad812-263b-4501-b9b8-323c8851ee3b
+
+	measure TC_Sus =
+			//SELECTEDVALUE(Fechas[TC_$us], BLANK())
+			    IF(
+			        HASONEVALUE(Fechas[TC_$us]),
+			        VALUES(Fechas[TC_$us]),
+			        BLANK()
+			    )
+		formatString: 0.00
+		lineageTag: 69be45c4-b6fa-4776-84cf-dcbc355598e2
+
+	measure VentasBs = SUM(Ventas[Venta])
+		formatString: #,0
+		displayFolder: Ventas
+		lineageTag: e3afc78c-59de-44e5-91aa-ea3b5b6f918b
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure Ventas$us = DIVIDE([VentasBs], [TC_Sus])
+		formatString: #,0
+		displayFolder: Ventas
+		lineageTag: 3cb98215-011f-4fcd-91d3-f6386c8212d0
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure Ventas = ```
+			
+			    IF (
+			        SELECTEDVALUE(Monedas[CodMoneda]) = "Bs",
+			        [VentasBs],
+			        [Ventas$us]
+			    )
+			```
+		formatString: #,0
+		displayFolder: Ventas
+		lineageTag: bc7e31e2-3444-49e0-964d-11ba59d96a7a
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure CostosBs = SUM(Ventas[Costo])
+		formatString: #,0
+		displayFolder: Ventas
+		lineageTag: bee34d68-94f3-4866-a91d-9ec7026e19c6
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure Costos$us = DIVIDE([CostosBs], [TC_Sus])
+		formatString: #,0
+		displayFolder: Ventas
+		lineageTag: e88ff767-e2e9-47ff-a69c-a8d87334f02a
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure Costos = ```
+			
+			    IF(
+			        SELECTEDVALUE(Monedas[CodMoneda]) = "Bs",
+			        [CostosBs],
+			        [Costos$us]
+			    )
+			```
+		formatString: #,0
+		displayFolder: Ventas
+		lineageTag: 1ebc5424-d3b7-4f5b-8919-a605af944112
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure QtyVentas = SUM(Ventas[Qty])
+		formatString: #,0
+		displayFolder: Ventas
+		lineageTag: 2d51d2a9-88bc-4381-bc54-a1b84218c2c0
+
+	measure QtyVtasPerdidas_StockMateriales = ```
+			
+			    SUM(Stock_Materiales[Qty_VtaPerdida])
+			```
+		formatString: #,0.00
+		displayFolder: Stock_Materiales
+		lineageTag: be92e7ad-b2ec-4b39-b750-16e34df641f0
+
+	measure ValorVtasPerdidasBs_StockMateriales = ```
+			
+			    SUM(Stock_Materiales[Valor_VtaPerdida])
+			```
+		formatString: #,0
+		displayFolder: Stock_Materiales
+		lineageTag: bd402b0e-a677-462a-9502-fbbab3ec7fe8
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure Stock_StockMateriales = SUM(Stock_Materiales[Stock])
+		formatString: #,0
+		displayFolder: Stock_Materiales
+		lineageTag: 606f6daa-4119-4135-a1ef-3ca7bea9ec9a
+
+	measure ValorBs_StockMateriales = SUM(Stock_Materiales[ValorBs])
+		formatString: #,0
+		displayFolder: Stock_Materiales
+		lineageTag: c00ca9c4-c83d-406d-ac71-f081f8992a91
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure PrmVentas_StockMateriales = AVERAGE(Stock_Materiales[Prm_Qty])
+		formatString: #,0.00
+		displayFolder: Stock_Materiales
+		lineageTag: 87ee67da-9ed5-4b8d-8e15-2e382b75429a
+
+	measure Valor$us_StockMateriales = DIVIDE([ValorBs_StockMateriales], [TC_Sus])
+		displayFolder: Stock_Materiales
+		lineageTag: 98193e5c-15d6-442e-8cbf-b4bed6fb594a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure ValorVtasPerdidas$us_StockMateriales = DIVIDE([ValorVtasPerdidasBs_StockMateriales], [TC_Sus])
+		displayFolder: Stock_Materiales
+		lineageTag: 06148adc-6ca3-4851-b1a9-97b6af74124c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Valor_StockMateriales = ```
+			
+			    IF (
+			        SELECTEDVALUE(Monedas[CodMoneda]) = "Bs",
+			        [ValorBs_StockMateriales],
+			        [Valor$us_StockMateriales]
+			    )
+			```
+		formatString: #,0
+		displayFolder: Stock_Materiales
+		lineageTag: 36c5c4f8-0888-490e-b3cc-62d10178e287
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure ValorVtasPerdidas_StockMateriales = ```
+			
+			    IF (
+			        SELECTEDVALUE(Monedas[CodMoneda]) = "Bs",
+			        [ValorVtasPerdidasBs_StockMateriales],
+			        [ValorVtasPerdidas$us_StockMateriales]
+			    )
+			```
+		formatString: #,0
+		displayFolder: Stock_Materiales
+		lineageTag: b1a1e7e5-d537-4194-b365-c8afdc7558e8
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure PrmVentas_StockRelacionador = AVERAGE(Stock_Relacionador[Prm_Qty])
+		displayFolder: Stock_Relacionador
+		lineageTag: 4fb7d708-ee6d-4558-8827-5d7c0be1fc3f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure QtyVtasPerdidas_StockRelacionador = SUM(Stock_Relacionador[Qty_VtaPerdida])
+		displayFolder: Stock_Relacionador
+		lineageTag: 588fa09f-c82d-4f54-89f4-250188f2ce0e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure ValorVtasPerdidas_StockRelacionador = ```
+			
+			    IF (
+			        SELECTEDVALUE(Monedas[CodMoneda]) = "Bs",
+			        [ValorVtasPerdidasBs_StockRelacionador],
+			        [ValorVtasPerdidas$us_StockRelacionador]
+			    )
+			```
+		displayFolder: Stock_Relacionador
+		lineageTag: b818a221-84e9-4f23-8188-3131c9a4c4ac
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure ValorVtasPerdidasBs_StockRelacionador = SUM(Stock_Relacionador[Valor_VtaPerdida])
+		displayFolder: Stock_Relacionador
+		lineageTag: bafb19ec-ba45-45a3-afb4-4fc04a7b2b76
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure ValorVtasPerdidas$us_StockRelacionador = DIVIDE([ValorVtasPerdidasBs_StockRelacionador], [TC_Sus])
+		displayFolder: Stock_Relacionador
+		lineageTag: 8bbea758-26a2-452f-8488-eab075de002f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Stock_StockRelacionador = SUM(Stock_Relacionador[Stock])
+		formatString: #,0
+		displayFolder: Stock_Relacionador
+		lineageTag: aab9af57-c20a-4f08-be9c-3faca1c3aef3
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Origen = PowerBI.Dataflows(null),
+				    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+				    #"8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a"]}[Data],
+				    Medidas1 = #"8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a"{[entity="Medidas"]}[Data],
+				    #"Columnas quitadas" = Table.RemoveColumns(Medidas1,{"Columna 1"})
+				in
+				    #"Columnas quitadas"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,208 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "b47723e67833f2bdda9d",
+  "position": {
+    "x": 260.66869300911856,
+    "y": 74.8936170212766,
+    "z": 7000,
+    "height": 295.68389057750761,
+    "width": 1019.3313069908816,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "Fechas"
+                            }
+                          },
+                          "Name": "Variación",
+                          "Property": "AñoMes"
+                        }
+                      },
+                      "Hierarchy": "Jerarquía de fechas"
+                    }
+                  },
+                  "Level": "Año"
+                }
+              },
+              "queryRef": "Fechas.AñoMes.Variación.Jerarquía de fechas.Año",
+              "nativeQueryRef": "AñoMes Año",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "Fechas"
+                            }
+                          },
+                          "Name": "Variación",
+                          "Property": "AñoMes"
+                        }
+                      },
+                      "Hierarchy": "Jerarquía de fechas"
+                    }
+                  },
+                  "Level": "Mes"
+                }
+              },
+              "queryRef": "Fechas.AñoMes.Variación.Jerarquía de fechas.Mes",
+              "nativeQueryRef": "AñoMes Mes",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Ventas"
+                    }
+                  },
+                  "Property": "VtaCruzada"
+                }
+              },
+              "queryRef": "Ventas.VtaCruzada",
+              "nativeQueryRef": "VtaCruzada",
+              "active": true
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Sucursales"
+                    }
+                  },
+                  "Property": "Regional"
+                }
+              },
+              "queryRef": "Sucursales.Regional",
+              "nativeQueryRef": "Regional",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Sucursales"
+                    }
+                  },
+                  "Property": "Sucursal"
+                }
+              },
+              "queryRef": "Sucursales.Sucursal",
+              "nativeQueryRef": "Sucursal",
+              "active": false
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "Ventas"
+                }
+              },
+              "queryRef": "Medidas.Ventas",
+              "nativeQueryRef": "Ventas"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "QtyVentas"
+                }
+              },
+              "queryRef": "Medidas.QtyVentas",
+              "nativeQueryRef": "QtyVentas"
+            }
+          ]
+        }
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "Sucursales.Regional"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Sucursales"
+                    }
+                  },
+                  "Property": "Regional"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "Sucursales.Sucursal"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {}
+      }
+    ],
+    "visualContainerObjects": {
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

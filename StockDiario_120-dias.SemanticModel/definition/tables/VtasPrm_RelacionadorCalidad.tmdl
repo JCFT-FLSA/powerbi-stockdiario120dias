@@ -1,0 +1,71 @@
+table VtasPrm_RelacionadorCalidad
+	lineageTag: 15fa4b0e-4dfc-43d2-921f-87689df7ec4e
+
+	column Id-RelaCalidad_Centro
+		dataType: string
+		lineageTag: 5aa9e5ae-7c6f-4e5f-9736-9fed47bcb040
+		summarizeBy: none
+		sourceColumn: Id-RelaCalidad_Centro
+
+		annotation SummarizationSetBy = Automatic
+
+	column Prm_Qty
+		dataType: double
+		lineageTag: 0bc50cc1-03f3-41fd-86d1-322fd2aa4d13
+		summarizeBy: sum
+		sourceColumn: Prm_Qty
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Prm_VtaBs
+		dataType: double
+		lineageTag: 8f85273d-c26c-409a-bdd6-20daab241ed4
+		summarizeBy: sum
+		sourceColumn: Prm_VtaBs
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Valor_PrmUnit
+		dataType: double
+		lineageTag: 44fa1d41-b42e-4d1d-89e3-98f42b1d19d3
+		summarizeBy: sum
+		sourceColumn: Valor_PrmUnit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition VtasPrm_RelacionadorCalidad = m
+		mode: import
+		source = ```
+				let
+				    Origen = Table.Combine({VentasSAP_2025, VentasSAP_2026}),
+				    Hoy = Date.From(DateTime.LocalNow()),
+				    InicioMesActual = Date.StartOfMonth(Hoy),
+				    InicioVentana = Date.AddMonths(InicioMesActual, -12),    
+				
+				    #"Filtrar Ultimos 3 Meses" = Table.SelectRows(Origen, each [Fecha] >= InicioVentana and [Fecha] <= Hoy),
+				    #"Consultas combinadas" = Table.NestedJoin(#"Filtrar Ultimos 3 Meses", {"Sucursal"}, Sucursales, {"Oficina de Ventas"}, "Sucursales", JoinKind.LeftOuter),
+				    #"Se expandió Sucursales" = Table.ExpandTableColumn(#"Consultas combinadas", "Sucursales", {"CodSuc"}, {"Sucursales.CodSuc"}),
+				    #"Personalizada agregada" = Table.AddColumn(#"Se expandió Sucursales", "CodSuc", each if [Sucursales.CodSuc] = null then [Sucursal] else [Sucursales.CodSuc]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Personalizada agregada",{{"CodSuc", Int64.Type}}),
+				    #"Consultas combinadas1" = Table.NestedJoin(#"Tipo cambiado", {"Material"}, Materiales, {"Material"}, "Materiales", JoinKind.LeftOuter),
+				    #"Se expandió Materiales" = Table.ExpandTableColumn(#"Consultas combinadas1", "Materiales", {"Relacionador calidad"}, {"Materiales.Relacionador calidad"}),
+				    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Se expandió Materiales",{{"Materiales.Relacionador calidad", "Relacionador calidad"}}),
+				    #"Personalizada agregada1" = Table.AddColumn(#"Columnas con nombre cambiado", "Id-RelaCalidad_Centro", each Text.Combine ({Text.From(Date.Year([Fecha]), "es-BO"), "_", Text.From([Relacionador calidad], "es-BO"), "_", Text.From([CodSuc], "es-BO")})),
+				    #"Filas agrupadas" = Table.Group(#"Personalizada agregada1", {"Id-RelaCalidad_Centro"}, {{"Prm_Qty", each List.Average([Qty]), type nullable number}, {"Prm_VtaBs", each List.Average([Venta]), type nullable number}}),
+				    #"Personalizada agregada2" = Table.AddColumn(#"Filas agrupadas", "Valor_PrmUnit", each [Prm_VtaBs] / [Prm_Qty]),
+				    #"Tipo cambiado1" = Table.TransformColumnTypes(#"Personalizada agregada2",{{"Valor_PrmUnit", type number}}),
+				    #"Filas filtradas" = Table.SelectRows(#"Tipo cambiado1", each [Prm_Qty] > 0)
+				in
+				    #"Filas filtradas"
+				```
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Exception
+

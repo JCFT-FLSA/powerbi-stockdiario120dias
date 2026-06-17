@@ -1,0 +1,719 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 395,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 4060.916955640309,
+            "y": 26.355913005986054
+          },
+          "nodeIndex": "Fechas",
+          "nodeLineageTag": "f0b96f58-59ee-48ef-8e83-96d1e11995a5",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 13
+        },
+        {
+          "location": {
+            "x": 3364.916955640309,
+            "y": 114.85591300598605
+          },
+          "nodeIndex": "Medidas",
+          "nodeLineageTag": "d6dad812-263b-4501-b9b8-323c8851ee3b",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 14
+        },
+        {
+          "location": {
+            "x": 3788.916955640309,
+            "y": 20.355913005986054
+          },
+          "nodeIndex": "Materiales",
+          "nodeLineageTag": "e52d1ec5-4995-4627-8e9a-cceb50beec06",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 19
+        },
+        {
+          "location": {
+            "x": 4462.9169556403085,
+            "y": 20.355913005986054
+          },
+          "nodeIndex": "Sucursales",
+          "nodeLineageTag": "5224004d-feff-4072-9817-4926077dd51b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 20
+        },
+        {
+          "location": {
+            "x": 5253.9169556403085,
+            "y": 223.48091300598605
+          },
+          "nodeIndex": "Ventas",
+          "nodeLineageTag": "ef67104c-ceb0-44af-879c-73a55f46a394",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1420.916955640309,
+            "y": 289.625
+          },
+          "nodeIndex": "Canales",
+          "nodeLineageTag": "3c1d7d90-6413-4ad6-95b8-9f0b4c14f898",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 1704.916955640309,
+            "y": 215.625
+          },
+          "nodeIndex": "Clientes",
+          "nodeLineageTag": "95f9b30b-a6d1-4609-bd03-7754dfe4dc1e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1988.916955640309,
+            "y": 289.625
+          },
+          "nodeIndex": "Monedas",
+          "nodeLineageTag": "d131c474-7764-4365-909a-354c949caa7f",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 2272.916955640309,
+            "y": 289.625
+          },
+          "nodeIndex": "TipoCalidad",
+          "nodeLineageTag": "5fe9a24c-39f8-44f2-81d4-6f3a82169c5f",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 2556.916955640309,
+            "y": 217.625
+          },
+          "nodeIndex": "Vendedores",
+          "nodeLineageTag": "c261488b-7767-4389-a99d-78ed56f76e5b",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1186.916955640309,
+            "y": 317.80231252760029
+          },
+          "nodeIndex": "VtasPromedio",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 2840.916955640309,
+            "y": 301.625
+          },
+          "nodeIndex": "VtasPrm_RelacionadorCalidad",
+          "nodeLineageTag": "15fa4b0e-4dfc-43d2-921f-87689df7ec4e",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 3124.916955640309,
+            "y": 253.625
+          },
+          "nodeIndex": "Stock_Relacionador",
+          "nodeLineageTag": "d91bf5ee-3cbf-4d88-8599-fd3127e9e7a7",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 351.20565537484038,
+            "y": 505.09761578661846
+          },
+          "nodeIndex": "Stock_Materiales",
+          "nodeLineageTag": "dc41f301-0923-4d29-802b-0c5dd3c551d8",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 21
+        },
+        {
+          "location": {
+            "x": 618.459648240491,
+            "y": 181.33682601197216
+          },
+          "nodeIndex": "Materiales_Relacionador",
+          "nodeLineageTag": "431ad010-656e-4b27-b6da-a3ca8b43d797",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {},
+          "nodeIndex": "ABC_x_Centros",
+          "nodeLineageTag": "c02a39c0-5466-4bfe-b2a2-9d68c163b90f",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 149.91317398802786
+          },
+          "nodeIndex": "Fechas_Relacionador",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas las tablas",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 200
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 380,
+            "y": 566
+          },
+          "nodeIndex": "Ventas",
+          "nodeLineageTag": "ef67104c-ceb0-44af-879c-73a55f46a394",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 589,
+            "y": 6
+          },
+          "nodeIndex": "Sucursales",
+          "nodeLineageTag": "5224004d-feff-4072-9817-4926077dd51b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 108,
+            "y": 22
+          },
+          "nodeIndex": "Fechas",
+          "nodeLineageTag": "f0b96f58-59ee-48ef-8e83-96d1e11995a5",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 354
+          },
+          "nodeIndex": "Materiales",
+          "nodeLineageTag": "e52d1ec5-4995-4627-8e9a-cceb50beec06",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 1",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 2,
+      "scrollPosition": {
+        "x": 83,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1515,
+            "y": 0
+          },
+          "nodeIndex": "Materiales",
+          "nodeLineageTag": "e52d1ec5-4995-4627-8e9a-cceb50beec06",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 1151,
+            "y": 479
+          },
+          "nodeIndex": "Ventas",
+          "nodeLineageTag": "ef67104c-ceb0-44af-879c-73a55f46a394",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": -28,
+            "y": -20
+          },
+          "nodeIndex": "Fechas",
+          "nodeLineageTag": "f0b96f58-59ee-48ef-8e83-96d1e11995a5",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 394,
+            "y": 0
+          },
+          "nodeIndex": "Sucursales",
+          "nodeLineageTag": "5224004d-feff-4072-9817-4926077dd51b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1511,
+            "y": 331
+          },
+          "nodeIndex": "VtasPromedio",
+          "nodeLineageTag": "4efb066a-b97c-4550-87eb-f6dae75d605a",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 2
+        }
+      ],
+      "name": "Disposición 2",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 3,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 629,
+            "y": 120
+          },
+          "nodeIndex": "Fechas",
+          "nodeLineageTag": "f0b96f58-59ee-48ef-8e83-96d1e11995a5",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 3",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 4,
+      "scrollPosition": {
+        "x": 0,
+        "y": 104
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 325,
+            "y": 64
+          },
+          "nodeIndex": "Fechas",
+          "nodeLineageTag": "f0b96f58-59ee-48ef-8e83-96d1e11995a5",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 797,
+            "y": 0
+          },
+          "nodeIndex": "Sucursales",
+          "nodeLineageTag": "5224004d-feff-4072-9817-4926077dd51b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 4",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 5,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 400,
+            "y": 423
+          },
+          "nodeIndex": "Stock_Materiales",
+          "nodeLineageTag": "dc41f301-0923-4d29-802b-0c5dd3c551d8",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 77,
+            "y": 50
+          },
+          "nodeIndex": "Materiales",
+          "nodeLineageTag": "e52d1ec5-4995-4627-8e9a-cceb50beec06",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 728,
+            "y": 27
+          },
+          "nodeIndex": "Fechas",
+          "nodeLineageTag": "f0b96f58-59ee-48ef-8e83-96d1e11995a5",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 402,
+            "y": -24
+          },
+          "nodeIndex": "Sucursales",
+          "nodeLineageTag": "5224004d-feff-4072-9817-4926077dd51b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 5",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 6,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 283,
+            "y": 417
+          },
+          "nodeIndex": "Stock_Materiales",
+          "nodeLineageTag": "dc41f301-0923-4d29-802b-0c5dd3c551d8",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 929,
+            "y": 27
+          },
+          "nodeIndex": "Fechas",
+          "nodeLineageTag": "f0b96f58-59ee-48ef-8e83-96d1e11995a5",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": -34,
+            "y": 35
+          },
+          "nodeIndex": "Materiales",
+          "nodeLineageTag": "e52d1ec5-4995-4627-8e9a-cceb50beec06",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 914,
+            "y": 528
+          },
+          "nodeIndex": "Sucursales",
+          "nodeLineageTag": "5224004d-feff-4072-9817-4926077dd51b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 634,
+            "y": 149
+          },
+          "nodeIndex": "Ventas",
+          "nodeLineageTag": "ef67104c-ceb0-44af-879c-73a55f46a394",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 277,
+            "y": 28
+          },
+          "nodeIndex": "Fechas_Relacionador",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 6",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 7,
+      "scrollPosition": {
+        "x": 0,
+        "y": 400
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 933,
+            "y": 720
+          },
+          "nodeIndex": "Ventas",
+          "nodeLineageTag": "ef67104c-ceb0-44af-879c-73a55f46a394",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 980,
+            "y": 0
+          },
+          "nodeIndex": "Fechas",
+          "nodeLineageTag": "f0b96f58-59ee-48ef-8e83-96d1e11995a5",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 701,
+            "y": 0
+          },
+          "nodeIndex": "Materiales",
+          "nodeLineageTag": "e52d1ec5-4995-4627-8e9a-cceb50beec06",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": -54,
+            "y": 4
+          },
+          "nodeIndex": "Materiales_Relacionador",
+          "nodeLineageTag": "431ad010-656e-4b27-b6da-a3ca8b43d797",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 766
+          },
+          "nodeIndex": "Fechas_Relacionador",
+          "nodeLineageTag": "5ba18d50-c5c4-422e-94a6-398990091acd",
+          "size": {
+            "height": 299,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 327,
+            "y": -26
+          },
+          "nodeIndex": "Sucursales",
+          "nodeLineageTag": "5224004d-feff-4072-9817-4926077dd51b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 391
+          },
+          "nodeIndex": "Stock_Relacionador",
+          "nodeLineageTag": "d91bf5ee-3cbf-4d88-8599-fd3127e9e7a7",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 7",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Disposición 7",
+  "defaultDiagram": "Todas las tablas"
+}

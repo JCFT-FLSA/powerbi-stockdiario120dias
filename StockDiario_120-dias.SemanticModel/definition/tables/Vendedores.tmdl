@@ -1,0 +1,94 @@
+table Vendedores
+	lineageTag: c261488b-7767-4389-a99d-78ed56f76e5b
+
+	column Codigo
+		dataType: int64
+		formatString: 0
+		lineageTag: 0f4e7449-9027-4ee7-8c8e-c281d81c547c
+		summarizeBy: sum
+		sourceColumn: Codigo
+
+		annotation SummarizationSetBy = Automatic
+
+	column NbVendedor
+		dataType: string
+		lineageTag: c5790075-2459-498e-8b57-ab15b1eaa43d
+		summarizeBy: none
+		sourceColumn: NbVendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column VendedorReg
+		dataType: int64
+		formatString: 0
+		lineageTag: c988cc87-0c88-43d5-a40e-4c5ec9b726c6
+		summarizeBy: sum
+		sourceColumn: VendedorReg
+
+		annotation SummarizationSetBy = Automatic
+
+	column ItemRRHH
+		dataType: int64
+		formatString: 0
+		lineageTag: 803e70c0-67dc-4676-baf0-bea504d92883
+		summarizeBy: sum
+		sourceColumn: ItemRRHH
+
+		annotation SummarizationSetBy = Automatic
+
+	column NbVendedorRRHH
+		dataType: string
+		lineageTag: e6e5e93f-22e7-4bd0-b0ad-7663a69f7a20
+		summarizeBy: none
+		sourceColumn: NbVendedorRRHH
+
+		annotation SummarizationSetBy = Automatic
+
+	column SucursalVendedor
+		dataType: int64
+		formatString: 0
+		lineageTag: 9e8caa63-b74b-4d70-ab34-ec0dd75893ad
+		summarizeBy: sum
+		sourceColumn: SucursalVendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column CargoVendedor
+		dataType: string
+		lineageTag: a3ee3d13-d426-46e7-94f4-e4ade46edc4c
+		summarizeBy: none
+		sourceColumn: CargoVendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column UsuarioSAP
+		dataType: string
+		lineageTag: 6072b7f8-ccde-4f44-96b9-4653bfadb48a
+		summarizeBy: none
+		sourceColumn: UsuarioSAP
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column9
+		dataType: string
+		lineageTag: 81114537-72d6-41f7-b584-a3d6c47ef964
+		summarizeBy: none
+		sourceColumn: Column9
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Vendedores = m
+		mode: import
+		source =
+				let
+				    Origen = PowerBI.Dataflows(null),
+				    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+				    #"8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a"]}[Data],
+				    Vendedores1 = #"8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a"{[entity="Vendedores"]}[Data]
+				in
+				    Vendedores1
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,137 @@
+table Clientes
+	lineageTag: 95f9b30b-a6d1-4609-bd03-7754dfe4dc1e
+
+	column Qty
+		dataType: double
+		lineageTag: 28a4b4b9-ac70-4ca5-8849-3b9ca53d26ce
+		summarizeBy: sum
+		sourceColumn: Qty
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Región
+		dataType: string
+		lineageTag: 83da53e1-7bc6-4970-aa23-d2309cacd716
+		summarizeBy: none
+		sourceColumn: Región
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ramo
+		dataType: string
+		lineageTag: 3e91a781-9c4a-4793-86d8-4baf77254de3
+		summarizeBy: none
+		sourceColumn: Ramo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Grupo de cuentas'
+		dataType: string
+		lineageTag: 50db9ff2-0c2c-4880-8a24-9cc2cbfb32aa
+		summarizeBy: none
+		sourceColumn: Grupo de cuentas
+
+		annotation SummarizationSetBy = Automatic
+
+	column Centro
+		dataType: string
+		lineageTag: 6acfdac5-4056-4316-a3cd-e34185c1dc54
+		summarizeBy: none
+		sourceColumn: Centro
+
+		annotation SummarizationSetBy = Automatic
+
+	column NIT_1
+		dataType: string
+		lineageTag: d586a365-345d-439d-85e2-5ca847c38eee
+		summarizeBy: none
+		sourceColumn: NIT_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cliente
+		dataType: int64
+		formatString: 0
+		lineageTag: d0bf26e3-ef6d-4d26-9f7b-4290365f24a9
+		summarizeBy: sum
+		sourceColumn: Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fecha Registro'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1242bb89-82a5-497b-9597-a39d7642c6fa
+		summarizeBy: none
+		sourceColumn: Fecha Registro
+
+		variation Variación
+			isDefault
+			relationship: 8376be5d-0905-422e-b646-daed15a945f0
+			defaultHierarchy: LocalDateTable_35aec381-7f56-4967-ba0f-6321a8fd9eb5.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column NIT
+		dataType: string
+		lineageTag: b9d98cdd-51d5-4018-a99a-df21ba12bec1
+		summarizeBy: none
+		sourceColumn: NIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column nbCliente
+		dataType: string
+		lineageTag: 494993e1-af4c-437b-9835-cec3101ac2fb
+		summarizeBy: none
+		sourceColumn: nbCliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sector
+		dataType: string
+		lineageTag: 56be50f8-de3a-4d02-9067-bf5305cf4d30
+		summarizeBy: none
+		sourceColumn: Sector
+
+		annotation SummarizationSetBy = Automatic
+
+	column Latitud
+		dataType: double
+		lineageTag: 45e7c55c-5037-4b5d-85c4-a6db0f6f2ebf
+		summarizeBy: sum
+		sourceColumn: Latitud
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Longitud
+		dataType: double
+		lineageTag: c40dbd8a-33cd-48ca-8274-01374456b66e
+		summarizeBy: sum
+		sourceColumn: Longitud
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Clientes = m
+		mode: import
+		source =
+				let
+				    Origen = PowerBI.Dataflows(null),
+				    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+				    #"8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a"]}[Data],
+				    Clientes1 = #"8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a"{[entity="Clientes"]}[Data]
+				in
+				    Clientes1
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

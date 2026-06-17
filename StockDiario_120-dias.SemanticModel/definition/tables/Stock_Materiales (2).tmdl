@@ -1,0 +1,134 @@
+table 'Stock_Materiales (2)'
+	lineageTag: de8fbc95-974b-469a-9e2c-2b0dad1d6ee4
+
+	column Centro
+		dataType: int64
+		formatString: 0
+		lineageTag: 681083a6-3fec-4b4d-8c4c-b82e7faeee37
+		summarizeBy: sum
+		sourceColumn: Centro
+
+		annotation SummarizationSetBy = Automatic
+
+	column Material
+		dataType: int64
+		formatString: 0
+		lineageTag: d3e1df88-a6de-44f4-ae62-2b3533331e31
+		summarizeBy: none
+		sourceColumn: Material
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fecha
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7c49a8ac-1ef0-4b0b-9e3e-52e8b3fbc8ab
+		summarizeBy: none
+		sourceColumn: Fecha
+
+		variation Variación
+			isDefault
+			relationship: 2f5f5a01-5ac8-481f-bd21-0f101926972b
+			defaultHierarchy: LocalDateTable_4c03ac59-3b25-45de-856d-1c0065f8c4fe.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Stock
+		dataType: int64
+		formatString: 0
+		lineageTag: 1210501f-feef-4f23-9a3d-72fc35ff009b
+		summarizeBy: sum
+		sourceColumn: Stock
+
+		annotation SummarizationSetBy = Automatic
+
+	column ValorBs
+		dataType: double
+		lineageTag: bf945d82-c3ab-477a-8479-09da491a2546
+		summarizeBy: sum
+		sourceColumn: ValorBs
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Id_MaterialCentro
+		dataType: string
+		lineageTag: 2c7d56d9-a13f-4ca3-9210-a92700d3c13b
+		summarizeBy: none
+		sourceColumn: Id_MaterialCentro
+
+		annotation SummarizationSetBy = Automatic
+
+	column Prm_Qty
+		dataType: double
+		lineageTag: e5d48a48-9167-4e29-8b5b-417a727ef922
+		summarizeBy: sum
+		sourceColumn: Prm_Qty
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Prm_ValorUnit
+		dataType: double
+		lineageTag: a45a2c0d-c6a3-41b5-8f5e-32ae4f391d42
+		summarizeBy: sum
+		sourceColumn: Prm_ValorUnit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'ABC_x_Centros.ABC'
+		dataType: string
+		lineageTag: 0db817ec-843d-4296-a132-26c98bbddd4c
+		summarizeBy: none
+		sourceColumn: ABC_x_Centros.ABC
+
+		annotation SummarizationSetBy = Automatic
+
+	column Qty_VtaPerdida
+		dataType: double
+		lineageTag: f6f027ec-d77f-4cea-8745-d259a98e300f
+		summarizeBy: sum
+		sourceColumn: Qty_VtaPerdida
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Valor_VtaPerdida
+		dataType: double
+		lineageTag: 402f604d-c800-4896-bb7e-e42fc701f39e
+		summarizeBy: sum
+		sourceColumn: Valor_VtaPerdida
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Stock_Materiales (2)' = m
+		mode: import
+		source =
+				let
+				    Origen = Table.Combine({StockDiarioMesActual}),
+				    #"Consultas combinadas" = Table.NestedJoin(Origen, {"Id_MaterialCentro"}, VtasPromedio, {"Id_MaterialSucursal"}, "VtasPromedio", JoinKind.LeftOuter),
+				    #"Se expandió VtasPromedio" = Table.ExpandTableColumn(#"Consultas combinadas", "VtasPromedio", {"Prm_Qty", "Prm_ValorUnit"}, {"Prm_Qty", "Prm_ValorUnit"}),
+				    #"Filas filtradas" = Table.SelectRows(#"Se expandió VtasPromedio", each ([Centro] = 301) and ([Material] = 14215)),
+				    #"Consultas combinadas1" = Table.NestedJoin(#"Filas filtradas", {"Id_MaterialCentro"}, ABC_x_Centros, {"Id_MaterialSucursal"}, "ABC_x_Centros", JoinKind.LeftOuter),
+				    #"Se expandió Materiales_ABC_Centro" = Table.ExpandTableColumn(#"Consultas combinadas1", "ABC_x_Centros", {"ABC"}, {"ABC_x_Centros.ABC"}),
+				    #"Valor reemplazado" = Table.ReplaceValue(#"Se expandió Materiales_ABC_Centro",null,0,Replacer.ReplaceValue,{"Prm_Qty", "Prm_ValorUnit"}),
+				    #"Personalizada agregada" = Table.AddColumn(#"Valor reemplazado", "Qty_VtaPerdida", each if ([Prm_Qty] - [Stock]) >= 0 then ([Prm_Qty] - [Stock]) else 0),
+				    #"Personalizada agregada1" = Table.AddColumn(#"Personalizada agregada", "Valor_VtaPerdida", each [Qty_VtaPerdida] * [Prm_ValorUnit]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Personalizada agregada1",{{"Qty_VtaPerdida", type number}, {"Valor_VtaPerdida", type number}}),
+				    #"Duplicados quitados" = Table.Distinct(#"Tipo cambiado")
+				in
+				    #"Duplicados quitados"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

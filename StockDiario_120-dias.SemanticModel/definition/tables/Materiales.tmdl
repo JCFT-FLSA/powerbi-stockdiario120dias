@@ -1,0 +1,175 @@
+table Materiales
+	lineageTag: e52d1ec5-4995-4627-8e9a-cceb50beec06
+
+	column Linea
+		dataType: string
+		lineageTag: dc172f85-06c2-4041-9473-9a9a780b123d
+		summarizeBy: none
+		sourceColumn: Linea
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'nbGrupo Materiales'
+		dataType: string
+		lineageTag: 66150bd5-cc0b-42d3-94f1-2cc648997b2d
+		summarizeBy: none
+		sourceColumn: nbGrupo Materiales
+
+		annotation SummarizationSetBy = Automatic
+
+	column Marca
+		dataType: string
+		lineageTag: b7ef3b41-c5b8-447e-b5f6-1426fb9a9727
+		summarizeBy: none
+		sourceColumn: Marca
+
+		annotation SummarizationSetBy = Automatic
+
+	column Material
+		dataType: int64
+		formatString: 0
+		lineageTag: f6227b08-7e28-471f-933b-1e4461a978de
+		summarizeBy: none
+		sourceColumn: Material
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sector
+		dataType: string
+		lineageTag: 2965002a-8cb4-4f40-b697-ae2fd8e71540
+		summarizeBy: none
+		sourceColumn: Sector
+
+		annotation SummarizationSetBy = Automatic
+
+	column Calidad
+		dataType: string
+		lineageTag: 2f2225a3-055f-4d69-a432-c337632a70d5
+		summarizeBy: none
+		sourceColumn: Calidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column UMB
+		dataType: string
+		lineageTag: a1c15115-b8f9-4411-b676-24c155f77d78
+		summarizeBy: none
+		sourceColumn: UMB
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UM contenido'
+		dataType: string
+		lineageTag: 95a0dfad-0acb-4ac1-92fc-c0fb20a9dcf5
+		summarizeBy: none
+		sourceColumn: UM contenido
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unidad
+		dataType: string
+		lineageTag: bdf9d9c8-b4b4-45e7-9678-f9cbf8bc054c
+		summarizeBy: none
+		sourceColumn: Unidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unidad de peso'
+		dataType: string
+		lineageTag: db2ddf98-75f0-4769-b9be-3f6b13f1c71e
+		summarizeBy: none
+		sourceColumn: Unidad de peso
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unidad de volumen'
+		dataType: string
+		lineageTag: 7f31f286-537e-4095-a402-f1cbaea95b87
+		summarizeBy: none
+		sourceColumn: Unidad de volumen
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tamaño/Dimensión
+		dataType: string
+		lineageTag: 4ca084bf-61ad-4188-9076-8685280a8511
+		summarizeBy: none
+		sourceColumn: Tamaño/Dimensión
+
+		annotation SummarizationSetBy = Automatic
+
+	column DescMaterial
+		dataType: string
+		lineageTag: 34506446-f818-4fea-bc81-641f2002ec7c
+		summarizeBy: none
+		sourceColumn: DescMaterial
+
+		annotation SummarizationSetBy = Automatic
+
+	column nbMaterial
+		dataType: string
+		lineageTag: bb658b30-3622-493b-87ec-3ec2edcf1f98
+		summarizeBy: none
+		sourceColumn: nbMaterial
+
+		annotation SummarizationSetBy = Automatic
+
+	column Relacionador
+		dataType: string
+		lineageTag: b92d9ab4-3bd7-4083-b612-3d836387bcd5
+		summarizeBy: none
+		sourceColumn: Relacionador
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ABC GLOBAL'
+		dataType: string
+		lineageTag: ba7f01ee-0913-4c9c-ae73-ac0e72e5f781
+		summarizeBy: none
+		sourceColumn: ABC GLOBAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column Portafolio
+		dataType: string
+		lineageTag: b9fe8f6d-8378-4e8f-96b4-490ca2445334
+		summarizeBy: none
+		sourceColumn: Portafolio
+
+		annotation SummarizationSetBy = Automatic
+
+	column nbMarca
+		dataType: string
+		lineageTag: cf0ef223-12b9-4070-8a95-631b8ea33375
+		summarizeBy: none
+		sourceColumn: nbMarca
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Relacionador calidad'
+		dataType: string
+		lineageTag: 1476c77f-6690-4b21-be3b-0bee10ad57b2
+		summarizeBy: none
+		sourceColumn: Relacionador calidad
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Materiales = m
+		mode: import
+		source =
+				let
+				    Origen = PowerBI.Dataflows(null),
+				    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+				    #"8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a"]}[Data],
+				    Materiales_Atrib1 = #"8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a"{[entity="Materiales_Atrib"]}[Data],
+				    #"Consultas combinadas" = Table.NestedJoin(Materiales_Atrib1, {"Marca"}, Marcas, {"Marca"}, "Marcas", JoinKind.LeftOuter),
+				    #"Se expandió Marcas" = Table.ExpandTableColumn(#"Consultas combinadas", "Marcas", {"nbMarca"}, {"nbMarca"}),
+				    #"Otras columnas quitadas" = Table.SelectColumns(#"Se expandió Marcas",{"Linea", "nbGrupo Materiales", "Marca", "Material", "Sector", "Calidad", "UMB", "UM contenido", "Unidad", "Unidad de peso", "Unidad de volumen", "Tamaño/Dimensión", "DescMaterial", "nbMaterial", "Relacionador", "ABC GLOBAL", "Portafolio", "nbMarca"}),
+				    #"Columna combinada insertada" = Table.AddColumn(#"Otras columnas quitadas", "Relacionador calidad", each Text.Combine({[Relacionador], "&", [Calidad]}), type text)
+				in
+				    #"Columna combinada insertada"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Exception
+

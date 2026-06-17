@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "StockDiario_120-dias"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "0a2ce731-c020-47f3-a2e1-275aa5799186"
+  }
+}

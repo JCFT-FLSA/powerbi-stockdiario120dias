@@ -1,0 +1,130 @@
+table Sucursales
+	lineageTag: 5224004d-feff-4072-9817-4926077dd51b
+
+	column CodSuc
+		dataType: int64
+		formatString: 0
+		lineageTag: c02183f7-ff92-4cc8-b32d-0a395b170bfc
+		summarizeBy: none
+		sourceColumn: CodSuc
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sucursal
+		dataType: string
+		lineageTag: 2c8871da-fc83-42a3-9b25-fd94359a0036
+		summarizeBy: none
+		sourceColumn: Sucursal
+
+		annotation SummarizationSetBy = Automatic
+
+	column SucursalReg
+		dataType: int64
+		formatString: 0
+		lineageTag: 8754971f-c250-4ed3-bb38-af693f556e89
+		summarizeBy: sum
+		sourceColumn: SucursalReg
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Oficina de Ventas'
+		dataType: string
+		lineageTag: d0515871-35a4-487d-b8f5-05098a2d0216
+		summarizeBy: none
+		sourceColumn: Oficina de Ventas
+
+		annotation SummarizationSetBy = Automatic
+
+	column Latitud
+		dataType: double
+		lineageTag: 2d3a8f91-6b50-4152-bdeb-c0f6805bb80d
+		summarizeBy: sum
+		sourceColumn: Latitud
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Longitud
+		dataType: double
+		lineageTag: b634adc2-e127-4c31-9ed7-c086b78f0dd8
+		summarizeBy: sum
+		sourceColumn: Longitud
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SucursalFI
+		dataType: string
+		lineageTag: 2705bcdd-67fc-43c1-8599-5eb53a2f789a
+		summarizeBy: none
+		sourceColumn: SucursalFI
+
+		annotation SummarizationSetBy = Automatic
+
+	column Oficina
+		dataType: string
+		lineageTag: a460bd30-fd89-4b3d-beb8-49b3efd49f75
+		summarizeBy: none
+		sourceColumn: Oficina
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Centro Supply'
+		dataType: string
+		lineageTag: ec140ab8-5b3c-4fe1-bc74-3ac53a69a93b
+		summarizeBy: none
+		sourceColumn: Centro Supply
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ciudad
+		dataType: string
+		lineageTag: 05e864b9-add8-4db0-a443-9421486ce62f
+		summarizeBy: none
+		sourceColumn: Ciudad
+
+		annotation SummarizationSetBy = Automatic
+
+	column Departamento
+		dataType: string
+		lineageTag: e3792469-3a2c-4a9c-a825-036a4b1562ad
+		summarizeBy: none
+		sourceColumn: Departamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Canal
+		dataType: string
+		lineageTag: fb81c563-f0a2-47ea-ad82-7058301a92fb
+		summarizeBy: none
+		sourceColumn: Canal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Regional
+		dataType: string
+		lineageTag: 1d8a03c3-17e8-48ff-8363-3e418af4062f
+		summarizeBy: none
+		sourceColumn: Regional
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sucursales = m
+		mode: import
+		source =
+				let
+				    Origen = PowerBI.Dataflows(null),
+				    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+				    #"8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a"]}[Data],
+				    Sucursales1 = #"8c10ea0c-1410-4c0a-a06a-4da9d35c9b8a"{[entity="Sucursales"]}[Data],
+				    #"Consultas combinadas" = Table.NestedJoin(Sucursales1, {"SucursalReg"}, Regionales, {"CodRegional"}, "Regionales", JoinKind.LeftOuter),
+				    #"Se expandió Regionales" = Table.ExpandTableColumn(#"Consultas combinadas", "Regionales", {"Regional"}, {"Regional"})
+				in
+				    #"Se expandió Regionales"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

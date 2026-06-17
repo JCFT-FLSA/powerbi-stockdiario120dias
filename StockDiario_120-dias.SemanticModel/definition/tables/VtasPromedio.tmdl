@@ -1,0 +1,70 @@
+table VtasPromedio
+	lineageTag: 4efb066a-b97c-4550-87eb-f6dae75d605a
+
+	column Id_MaterialSucursal
+		dataType: string
+		lineageTag: 42cd37b3-7e49-4d16-9fc8-1ba4552aadeb
+		summarizeBy: none
+		sourceColumn: Id_MaterialSucursal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Prm_Qty
+		dataType: double
+		lineageTag: fa885e7d-4509-4a74-8f69-dfc0e35d3ee2
+		summarizeBy: sum
+		sourceColumn: Prm_Qty
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Prm_VtaBs
+		dataType: double
+		lineageTag: 10d0f0bf-80ab-4e17-b9f1-16887cf10e89
+		summarizeBy: sum
+		sourceColumn: Prm_VtaBs
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Prm_ValorUnit
+		dataType: double
+		lineageTag: bf4e4433-a1e2-4552-be2e-ac8e2212dbcd
+		summarizeBy: sum
+		sourceColumn: Prm_ValorUnit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition VtasPromedio = m
+		mode: import
+		source = ```
+				let
+				    Origen = Table.Combine({VentasSAP_2025, VentasSAP_2026}),
+				    Hoy = Date.From(DateTime.LocalNow()),
+				    InicioMesActual = Date.StartOfMonth(Hoy),
+				    InicioVentana = Date.AddMonths(InicioMesActual, -12),    
+				
+				    #"Filtrar Ultimos 12 Meses" = Table.SelectRows(Origen, each [Fecha] >= InicioVentana and [Fecha] <= Hoy),
+				    #"Consultas combinadas" = Table.NestedJoin(#"Filtrar Ultimos 12 Meses", {"Sucursal"}, Sucursales, {"Oficina de Ventas"}, "Sucursales", JoinKind.LeftOuter),
+				    #"Se expandió Sucursales" = Table.ExpandTableColumn(#"Consultas combinadas", "Sucursales", {"CodSuc"}, {"Sucursales.CodSuc"}),
+				    #"Personalizada agregada" = Table.AddColumn(#"Se expandió Sucursales", "CodSuc", each if [Sucursales.CodSuc] = null then [Sucursal] else [Sucursales.CodSuc]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Personalizada agregada",{{"CodSuc", Int64.Type}}),
+				    #"Columnas quitadas" = Table.RemoveColumns(#"Tipo cambiado",{"Sucursales.CodSuc"}),
+				    #"Agregar columna personalizada" = Table.AddColumn(#"Columnas quitadas", "Id_MaterialSucursal", each Text.Combine({Text.PadEnd(Date.ToText([Fecha], "yyyy"), 5, "-"), Text.Reverse(Text.Middle(Text.Reverse(Text.From([Material], "es-BO")), 7)), Text.End(Text.From([Material], "es-BO"), 8), Text.PadStart(Text.From([CodSuc], "es-BO"), 4, "-")}), type text),
+				    #"Filas agrupadas" = Table.Group(#"Agregar columna personalizada", {"Id_MaterialSucursal"}, {{"Prm_Qty", each List.Average([Qty]), type nullable number}, {"Prm_VtaBs", each List.Average([Venta]), type nullable number}}),
+				    #"Personalizada agregada1" = Table.AddColumn(#"Filas agrupadas", "Prm_ValorUnit", each [Prm_VtaBs]/[Prm_Qty]),
+				    #"Filas filtradas" = Table.SelectRows(#"Personalizada agregada1", each [Prm_Qty] > 0),
+				    #"Tipo cambiado1" = Table.TransformColumnTypes(#"Filas filtradas",{{"Prm_ValorUnit", type number}}),
+				    #"Duplicados quitados" = Table.Distinct(#"Tipo cambiado1")
+				in
+				    #"Duplicados quitados"
+				```
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

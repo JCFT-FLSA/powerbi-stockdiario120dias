@@ -1,0 +1,61 @@
+table ABC_x_Centros
+	lineageTag: c02a39c0-5466-4bfe-b2a2-9d68c163b90f
+
+	column Material
+		dataType: int64
+		formatString: 0
+		lineageTag: 7664f52a-886e-4a1f-9850-aa82bc2af47c
+		summarizeBy: none
+		sourceColumn: Material
+
+		annotation SummarizationSetBy = Automatic
+
+	column ABC
+		dataType: string
+		lineageTag: 7c7e92f9-169c-4f60-889f-6ac0469af78d
+		summarizeBy: none
+		sourceColumn: ABC
+
+		annotation SummarizationSetBy = Automatic
+
+	column Centro
+		dataType: int64
+		formatString: 0
+		lineageTag: 21d7bcea-ceb4-49e5-99b5-016e7dc66c07
+		summarizeBy: sum
+		sourceColumn: Centro
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gestion
+		dataType: int64
+		formatString: 0
+		lineageTag: 63621dce-a79f-4c96-9234-7676e3735d11
+		summarizeBy: sum
+		sourceColumn: Gestion
+
+		annotation SummarizationSetBy = Automatic
+
+	column Id_MaterialSucursal
+		dataType: string
+		lineageTag: a0c53a8d-240f-4835-bff6-bf8d0bac5adf
+		summarizeBy: none
+		sourceColumn: Id_MaterialSucursal
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ABC_x_Centros = m
+		mode: import
+		source =
+				let
+				    Origen = PowerBI.Dataflows(null),
+				    #"8a0370d2-c851-40af-9111-fcb301e92ea5" = Origen{[workspaceId="8a0370d2-c851-40af-9111-fcb301e92ea5"]}[Data],
+				    #"2b9bf284-1b50-433c-ba9a-6398334d3d20" = #"8a0370d2-c851-40af-9111-fcb301e92ea5"{[dataflowId="2b9bf284-1b50-433c-ba9a-6398334d3d20"]}[Data],
+				    ABC_x_Centros1 = #"2b9bf284-1b50-433c-ba9a-6398334d3d20"{[entity="ABC_x_Centros"]}[Data]
+				in
+				    ABC_x_Centros1
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
